@@ -1,9 +1,10 @@
 package com.example.a098_roomdatabase.repostori
 
+import android.app.Application
 import android.content.Context
-import com.example.a098_roomdatabase.room.DatabaseSiswa
 
 interface ContainerApp {
+    val RepositoriSiswa: RepositoriSiswa
     val repositorSiswa : RepositorSiswa
 }
 
@@ -13,6 +14,16 @@ class ContainerDataApp(private val context: Context):
         OfflineRepositorSiswa(
             siswaDao = DatabaseSiswa.getDatabase(context).siswaDao()
         )
+    }
+
+}
+
+class AplikasiSiswa : Application() {
+    lateinit var container : ContainerApp
+
+    override fun onCreate(){
+        super.onCreate()
+        container = ContainerDataApp(this)
     }
 
 }
